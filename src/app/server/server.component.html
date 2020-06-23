@@ -1,0 +1,28 @@
+<p
+  [ngStyle]="{ color: getColor() }"
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
+  Server with id {{ serverId }} is {{ serverStatus }}.
+</p>
+<hr />
+<label>Server Name</label>
+<input class="form-control mb-3" type="text" [(ngModel)]="serverName" />
+<button
+  class="btn btn-primary"
+  [disabled]="!serverName"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<p class="pt-1 text-success" *ngIf="serverCreated; else noServer">
+  {{ serverCreationStatus }}
+</p>
+<ng-template #noServer>
+  <p class="pt-1 text-danger">
+    {{ serverCreationStatus }}
+  </p>
+</ng-template>
+<div *ngIf="servers?.length > 0">Server list:</div>
+<div *ngFor="let server of servers">
+  {{ server }}
+</div>
